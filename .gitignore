@@ -3,10 +3,12 @@ node_modules/
 frontend/node_modules/
 frontend/dist/
 engine/build/
-engine/bin/*.o
+engine/bin/
 backend/__pycache__/
 backend/.pytest_cache/
 backend/results/*.tmp
+backend/results/test_dll.json
+backend/results/verify_out.json
 
 # Environment & secrets
 .env
