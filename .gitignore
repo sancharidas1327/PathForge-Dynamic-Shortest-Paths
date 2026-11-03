@@ -1,0 +1,22 @@
+# Build and binaries
+node_modules/
+frontend/node_modules/
+frontend/dist/
+engine/build/
+engine/bin/*.o
+backend/__pycache__/
+backend/.pytest_cache/
+backend/results/*.tmp
+
+# Environment & secrets
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
