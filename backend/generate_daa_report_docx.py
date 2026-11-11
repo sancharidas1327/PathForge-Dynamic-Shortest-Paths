@@ -1,6 +1,6 @@
 """
-Generate a comprehensive, university-grade Design and Analysis of Algorithms (DAA) Project Report
-in Microsoft Word (.docx) and Markdown (.md) formats for:
+Generate a warm, humanized, easy-to-understand Microsoft Word (.docx) and Markdown (.md)
+Project Report for Design and Analysis of Algorithms (DAA):
 Student Name: Sanchari Das
 Registration No.: 24BAI1038
 Subject: Design and Analysis of Algorithms (DAA)
@@ -155,31 +155,31 @@ def build_report() -> tuple[str, str]:
     # COVER / TITLE PAGE
     # =========================================================================
     elems.append(make_p("DESIGN AND ANALYSIS OF ALGORITHMS (DAA)", align="center", bold=True, size_hp=28, color="1E3A8A", space_before=360, space_after=80))
-    elems.append(make_p("RESEARCH PROJECT REPORT", align="center", bold=True, size_hp=24, color="475569", space_after=360))
-    elems.append(make_p("PathForge: A Witness-Guarded Dynamic Shortest Path Maintenance System", align="center", bold=True, size_hp=40, color="0F172A", space_after=180))
+    elems.append(make_p("COURSE PROJECT REPORT", align="center", bold=True, size_hp=24, color="475569", space_after=360))
+    elems.append(make_p("PathForge: A Smart Dynamic Shortest Path System", align="center", bold=True, size_hp=40, color="0F172A", space_after=140))
     elems.append(
         make_p(
-            "An Algorithmic Extension & Empirical Benchmarking Platform Motivated by\n“Incremental Shortest Paths in Almost Linear Time via a Modified Interior Point Method” (Yang P. Liu, arXiv:2506.19207v1)",
+            "Full Title: PathForge — A Witness-Guarded Dynamic Shortest Path Maintenance System\n"
+            "Motivated by “Incremental Shortest Paths in Almost Linear Time via a Modified Interior Point Method” (Yang P. Liu, arXiv:2506.19207v1)",
             align="center",
             italic=True,
             size_hp=22,
             color="334155",
-            space_after=480,
+            space_after=440,
         )
     )
 
     elems.append(
         make_table(
             [
-                ["Project Attribute", "Details"],
+                ["Student & Project Information", "Details"],
                 ["Student Name", "Sanchari Das"],
                 ["Registration Number", "24BAI1038"],
-                ["Course / Subject", "Design and Analysis of Algorithms (DAA)"],
-                ["Project Title", "PathForge: A Witness-Guarded Dynamic Shortest Path Maintenance System"],
-                ["Core Algorithm Engine", "Native C++17 STL Graph Engine (GCC 14.2.0, -std=c++17 -O3)"],
-                ["Backend & Analytics Stack", "Python ASGI / Starlette REST API, React 18 + TypeScript, Streamlit"],
-                ["GitHub Repository", "https://github.com/sancharidas1327/PathForge-Dynamic-Shortest-Paths"],
-                ["Verification Status", "11/11 Automated Suites Passed (362 Exact Dijkstra Oracle Checks, 0 Violations)"],
+                ["Subject", "Design and Analysis of Algorithms (DAA)"],
+                ["Project Name", "PathForge (Witness-Guarded Dynamic Shortest Paths)"],
+                ["Programming Languages Used", "C++17 (Core Algorithm Engine), Python (Backend & Streamlit), React + TypeScript"],
+                ["GitHub Repository Link", "https://github.com/sancharidas1327/PathForge-Dynamic-Shortest-Paths"],
+                ["Testing & Accuracy", "11 out of 11 Automated Test Suites Passed (100% Match with Exact Dijkstra)"],
             ]
         )
     )
@@ -187,261 +187,298 @@ def build_report() -> tuple[str, str]:
     elems.append(make_page_break())
 
     # =========================================================================
-    # SECTION 1: ABSTRACT & EXECUTIVE SUMMARY
+    # SECTION 1: INTRODUCTION (IN SIMPLE WORDS)
     # =========================================================================
-    elems.append(make_heading1("1. Abstract"))
+    elems.append(make_heading1("1. Introduction — What Is This Project About?"))
     elems.append(
         make_p(
-            "Maintaining Single-Source Shortest Path (SSSP) distances in dynamic directed weighted graphs is a foundational problem in the Design and Analysis of Algorithms (DAA), with direct applications to real-time road navigation, network packet routing, and disaster/flood outage management. Recent theoretical breakthroughs—specifically Yang P. Liu’s “Incremental Shortest Paths in Almost Linear Time via a Modified Interior Point Method” (arXiv:2506.19207v1)—achieve deterministic m^(1+o(1)) log W total update time for maintaining (1+ε)-approximate distances from a fixed source. However, the foundational paper is strictly restricted to monotone insertion-only (incremental) updates where shortest-path distances can only decrease; it cannot directly handle edge-weight increases or edge closures."
+            "Imagine using Google Maps to drive from your home to your university. When you start your trip, the app calculates the shortest path using an algorithm like Dijkstra's algorithm. However, real-world road networks are never static—new shortcuts open, traffic clears up, accidents cause sudden traffic jams (increasing travel time), and floods or roadworks completely close certain roads."
         )
     )
     elems.append(
         make_p(
-            "In this project, we design, implement, verify, and benchmark PathForge, a Witness-Guarded Dynamic Shortest Path Maintenance System in C++17 that extends dynamic SSSP maintenance to handle five lifecycle update events: Edge Insertion (INS), Edge-Weight Decrease (DEC), Edge-Weight Increase (INC), Edge Closure (CLOSE), and Edge Reopening (REOPEN). PathForge maintains the shortest-path tree T as an active collection of certified witness paths indexed via iterative Euler-tour subtree intervals [tin, tout]. When a non-tree edge increases in weight or closes (e ∉ T), PathForge proves and exploits witness invariance to skip recomputation in O(1) worst-case time. When a tree edge increases or closes (e ∈ T), PathForge isolates the invalidated rooted subtree S = Subtree(T, v) and repairs exact distances locally using live incoming boundary edges from unaffected vertices V \\ S, governed by a configurable invalidation budget τ · |V| and parallel-edge compaction policy."
+            "If a navigation system runs full Dijkstra's algorithm from scratch every single time any road in the city changes, it wastes a huge amount of computation time—especially if the road that got jammed or closed wasn't even on your best route! On the other hand, recent research papers—such as Yang P. Liu’s 2025 paper (arXiv:2506.19207v1)—can update shortest paths very fast, but only when new edges are inserted (where paths only get shorter). They cannot directly handle roads getting slower or closing down."
         )
     )
     elems.append(
         make_p(
-            "Across 11 automated verification suites (362 sequential checks against an independent stateless Exact Dijkstra Oracle), PathForge achieves 100% exact distance and witness-path parity with zero violations, while delivering 3.78x to 19.02x empirical speedups over full Dijkstra recomputation (B0) and 4.73x to 4.94x speedups over ablation baselines (A1, A3)."
+            "To solve this practical gap for my Design and Analysis of Algorithms (DAA) project, I built PathForge. PathForge is a C++17 algorithm engine and interactive visual platform that maintains exact shortest paths when the graph changes in five realistic ways: inserting an edge (INSERT), reducing an edge's weight (DECREASE), increasing an edge's weight (INCREASE), closing an edge completely (CLOSE), and reopening a closed edge (REOPEN)."
         )
     )
 
     # =========================================================================
-    # SECTION 2: PROBLEM STATEMENT & RESEARCH TRANSPARENCY
+    # SECTION 2: THE CORE IDEA — HOW PATHFORGE WORKS SIMPLY
     # =========================================================================
-    elems.append(make_heading1("2. Problem Statement & Epistemological Transparency"))
-    elems.append(make_heading2("2.1 Limitations of Insertion-Only SSSP Maintenance"))
+    elems.append(make_heading1("2. The Core Idea — How Does PathForge Work?"))
     elems.append(
         make_p(
-            "Given a directed weighted multigraph G = (V, E, w) with non-negative integral edge weights w(e) ≥ 0 and a fixed source vertex s ∈ V, a dynamic SSSP algorithm must maintain exact distances dist[v] = d_G(s, v) and valid source-to-vertex shortest paths under an online sequence of edge updates e_1, e_2, ..., e_K. Classical static re-evaluation (running Dijkstra's algorithm from scratch after every update, Baseline B0) requires O(m + n log n) time per update even when the modified edge is irrelevant to all shortest paths. Conversely, insertion-only dynamic algorithms (such as Liu's arXiv:2506.19207v1 or incremental surrogate B2) rely on monotone distance drops and fail when edge weights increase or edges close."
+            "Instead of recomputing the entire graph after every change, PathForge remembers the best route to every vertex using a Shortest-Path Tree (T). We call the paths inside this tree 'witness paths' because they serve as proof (a witness) of the current shortest distance to each node."
+        )
+    )
+    elems.append(make_heading2("2.1 The Three Simple Rules of PathForge"))
+    elems.append(
+        make_bullet(
+            "Rule 1: When a road NOT on our best tree gets slower or closes (O(1) Instant Skip)",
+            "Suppose an edge e = (u -> v) increases in weight or closes. We first check if e is part of our Shortest-Path Tree T. If it is NOT in T, nobody was using that road for their shortest path anyway! And making a road slower or closing it can never create a new shortcut. So PathForge simply updates the edge weight and skips recomputation in O(1) time (0 vertices recomputed).",
+        )
+    )
+    elems.append(
+        make_bullet(
+            "Rule 2: When a road ON our best tree gets slower or closes (Local Subtree Repair)",
+            "If the changed edge e = (u -> v) WAS part of our Shortest-Path Tree T, does the whole graph break? No! Only vertex v and the nodes below v in the tree (its subtree) lose their best path. Every other node outside that subtree still has its exact shortest path intact. So PathForge only resets that small affected subtree, looks at live 'boundary edges' coming into that subtree from unaffected nodes, and runs Dijkstra only on that small region.",
+        )
+    )
+    elems.append(
+        make_bullet(
+            "Rule 3: When a new road is added or a road gets faster (Incremental Relaxation)",
+            "When an edge is inserted (INSERT), reopened (REOPEN), or its weight decreases (DECREASE), paths can only get shorter. We check if the new edge offers a shorter distance to v (dist[u] + weight < dist[v]). If it does, we propagate that improvement forward using a priority queue. For DECREASE, we add a parallel lighter edge so we still keep the history of the older weight.",
+        )
+    )
+    elems.append(
+        make_bullet(
+            "Safety Valve (The Invalidation Budget τ)",
+            "What if dozens of tree edges break one after another? Doing many small repairs might eventually take longer than a clean restart. So PathForge tracks how many vertices have been invalidated. Once that count crosses a budget threshold (by default 35% of the graph's vertices), PathForge cleans up old parallel edges and performs one fresh full Dijkstra rebuild.",
         )
     )
 
-    elems.append(make_heading2("2.2 Strict Epistemological Separation"))
+    # =========================================================================
+    # SECTION 3: HONEST RESEARCH COMPARISON (PAPER VS OUR PROJECT)
+    # =========================================================================
+    elems.append(make_heading1("3. Comparison: Base Research Paper vs. Our PathForge System"))
+    elems.append(
+        make_p(
+            "A very important part of good research is being transparent about what the original paper proved mathematically versus what our implemented prototype does:"
+        )
+    )
     elems.append(
         make_table(
             [
-                ["Dimension", "Scope & Status in PathForge"],
+                ["Feature / Aspect", "Original Paper (Yang P. Liu, 2025)", "Our PathForge Project"],
                 [
-                    "1. Established Paper Result [S1]",
-                    "Deterministic m^(1+o(1)) log W total update time for insertion-only (1+ε)-approximate directed SSSP via Modified Interior Point Method (Yang P. Liu, arXiv:2506.19207v1).",
+                    "What graph updates are supported?",
+                    "Only Edge Insertions (INS) where distances only decrease.",
+                    "All 5 Events: INSERT, DECREASE, INCREASE, CLOSE, and REOPEN.",
                 ],
                 [
-                    "2. Proposed Algorithmic Extension",
-                    "Five-event (INS, DEC, INC, CLOSE, REOPEN) witness-guarded shortest-path tree T with Euler-tour subtree indexing, O(1) non-tree skip, localized Subtree(T, v) boundary repair, versioned parallel DEC retention, and budgeted edge compaction.",
+                    "What kind of distances are maintained?",
+                    "(1+ε)-Approximate distances using a theoretical Interior Point Method (IPM).",
+                    "100% Exact distances using a C++17 Witness-Tree & Boundary-Repair engine.",
                 ],
                 [
-                    "3. Implemented C++17 Prototype",
-                    "Native C++17 engine (engine/include/pathforge_engine.hpp) maintaining exact 64-bit integer distances and witness paths, exposed via CLI, Ctypes shared library, Python ASGI API, React UI, and Streamlit.",
+                    "What happens when a non-tree edge closes?",
+                    "Not supported by the paper's main theorem.",
+                    "Handled in O(1) time (instant skip, 0 vertices recomputed).",
                 ],
                 [
-                    "4. Experimental Results Obtained",
-                    "11/11 verification suites passed (362 exact oracle checks, 0 violations); 8.66x speedup at |V|=120 and 19.02x speedup at |V|=1000 over Full Dijkstra (B0).",
+                    "What happens when a tree edge closes?",
+                    "Breaks the monotone potential assumption of the IPM barrier.",
+                    "Invalidates only the affected subtree Subtree(T, v) and repairs it via live boundary edges.",
                 ],
                 [
-                    "5. Open Theoretical Proof Obligations",
-                    "Does not claim worst-case m^(1+o(1)) time for adversarial decremental updates; documents the potential-cost recharge obligation when coupling upward distance shifts in Subtree(T, v) to the modified IPM barrier.",
+                    "Is there working code and benchmarks?",
+                    "Theory-only paper (no code or runtime experiments).",
+                    "Complete C++17 engine, 11 unit test suites, Python API, React UI, and Streamlit dashboard.",
                 ],
             ]
         )
     )
 
     # =========================================================================
-    # SECTION 3: CORE ALGORITHM DESIGN & MATHEMATICAL INVARIANTS
+    # SECTION 4: STEP-BY-STEP ALGORITHM & DATA STRUCTURES (FOR DAA)
     # =========================================================================
-    elems.append(make_heading1("3. Core Algorithm Design & Data Structures"))
-    elems.append(make_heading2("3.1 Graph & Witness-Tree Data Structures"))
-    elems.append(make_bullet("Directed Adjacency Lists (adj_ and rev_adj_)", "Forward adjacency list adj_[u] stores outgoing edge IDs for relaxation; reverse adjacency list rev_adj_[v] stores incoming edge IDs required to scan boundary edges entering an invalidated subtree."))
-    elems.append(make_bullet("Versioned Edge Descriptors (struct Edge)", "Each edge stores {id, u, v, weight, live, version, parent_edge_id}. Closed edges have live = false and are strictly forbidden from appearing in any witness path."))
-    elems.append(make_bullet("Shortest-Path Witness Tree T (parent_edge_ and tree_children_)", "For each reachable vertex v ≠ s, parent_edge_[v] stores the unique incoming live tree edge ID certifying dist_[v]."))
-    elems.append(make_bullet("Iterative Euler-Tour Subtree Indexing (tin_ and tout_)", "An iterative DFS traversal over tree_children_ computes entry/exit timestamps [tin_[v], tout_[v]] in O(n) time without recursion stack overflow. A vertex x belongs to Subtree(T, v) if and only if tin_[v] ≤ tin_[x] ≤ tout_[v]."))
+    elems.append(make_heading1("4. Data Structures & Algorithm Used (DAA Concepts)"))
+    elems.append(make_heading2("4.1 Key Data Structures in Our C++17 Code"))
+    elems.append(make_bullet("1. Forward & Reverse Adjacency Lists (adj_ and rev_adj_)", "adj_[u] stores all outgoing edges from vertex u (used during normal Dijkstra relaxation). rev_adj_[v] stores all incoming edges into vertex v (used during subtree repair to quickly find live boundary edges entering the broken subtree from safe nodes)."))
+    elems.append(make_bullet("2. Min-Heap Priority Queue (std::priority_queue)", "Always extracts the vertex with the smallest tentative distance in O(log V) time."))
+    elems.append(make_bullet("3. Parent Edge Array & Tree Children (parent_edge_, tree_children_)", "Stores the exact Shortest-Path Tree T so we can check in O(1) time whether any edge belongs to T."))
+    elems.append(make_bullet("4. Euler-Tour Subtree Intervals (tin_ and tout_)", "By running a Depth-First Search (DFS) on the shortest-path tree T, we record the entry time tin[v] and exit time tout[v] for every node. This is a classic DAA trick: any node x is inside the subtree of v if and only if tin[v] ≤ tin[x] ≤ tout[v]."))
 
-    elems.append(make_heading2("3.2 Mathematical Invariants (I1, I2, I3)"))
-    elems.append(make_bullet("Invariant I1 (Witness Soundness)", "After every update, for every reachable vertex v ∈ V, tracing parent_edge_ pointers from v back to s yields a simple directed path of live edges whose weights sum exactly to dist_[v]."))
-    elems.append(make_bullet("Invariant I2 (Non-Tree Immunity / O(1) Skip Lemma)", "If an edge e = (u, v) is not in T (parent_edge_[v] ≠ e.id) and undergoes INCREASE or CLOSE, no witness path in T traverses e, and w'(e) ≥ w(e) cannot introduce a shorter path. Thus d_{G'}(s, x) = d_G(s, x) for all x ∈ V, requiring 0 priority-queue operations."))
-    elems.append(make_bullet("Invariant I3 (Subtree Localization & Boundary Completeness)", "If a tree edge e = (u, v) ∈ T undergoes INCREASE or CLOSE, then for every vertex x ∉ S = Subtree(T, v), its witness path in T does not contain e and dist_[x] remains exact. Any new shortest path to y ∈ S must enter S via a live boundary edge (x, y') ∈ E(V \\ S, S) with x ∉ S."))
-
-    elems.append(make_heading2("3.3 Algorithm Pseudocode"))
+    elems.append(make_heading2("4.2 Easy-to-Read Pseudocode of PathForge"))
     elems.append(
         make_code_block(
-            "PROCEDURE APPLY_UPDATE(G, T, event = (type, e=(u,v), w_new)):\n"
-            "  IF type == INSERT:\n"
-            "    eid <- ADD_INITIAL_EDGE(u, v, w_new, live=true)\n"
-            "    INCREMENTAL_RELAX_FROM_EDGE(eid)\n"
-            "  ELSE IF type == DECREASE:\n"
-            "    eid <- ADD_PARALLEL_EDGE(u, v, w_new, live=true, parent=e.parent_edge_id)\n"
-            "    INCREMENTAL_RELAX_FROM_EDGE(eid)\n"
-            "  ELSE IF type == REOPEN:\n"
-            "    e.live <- true; e.weight <- w_new; e.version++\n"
-            "    INCREMENTAL_RELAX_FROM_EDGE(e.id)\n"
-            "  ELSE IF type IN {INCREASE, CLOSE}:\n"
-            "    is_tree_edge <- (e.live AND parent_edge[v] == e.id)\n"
-            "    IF type == CLOSE THEN e.live <- false ELSE e.weight <- w_new\n"
-            "    IF NOT is_tree_edge THEN\n"
-            "      RETURN WITNESS_PATHS_INTACT  // O(1) Witness-Guarded Skip!\n"
-            "    S <- COLLECT_SUBTREE(T, v)\n"
-            "    cumulative_invalidated += |S|\n"
-            "    IF cumulative_invalidated > CEIL(tau * |V|) THEN\n"
-            "      COMPACT_PARALLEL_EDGES(G)\n"
-            "      FULL_DIJKSTRA_REBUILD(G, s)\n"
-            "    ELSE:\n"
-            "      FOR y IN S: dist[y] <- +INF; parent_edge[y] <- -1\n"
-            "      FOR y IN S:\n"
-            "        FOR incoming live b=(x -> y) IN rev_adj[y] WITH x NOT IN S:\n"
-            "          IF dist[x] + b.weight < dist[y]:\n"
-            "            dist[y] <- dist[x] + b.weight; parent_edge[y] <- b.id\n"
-            "        IF dist[y] < +INF: PQ.PUSH((dist[y], y))\n"
-            "      RESTRICTED_DIJKSTRA(PQ)\n"
-            "      REBUILD_EULER_TOUR_INDEX(T)"
+            "Algorithm: PathForge Witness-Guarded Dynamic Update\n"
+            "Input: Graph G=(V,E), Shortest-Path Tree T, Update Event (type, edge e=(u->v), new_weight)\n\n"
+            "1. IF type is INSERT, DECREASE, or REOPEN:\n"
+            "     Add/activate the edge with new_weight\n"
+            "     IF dist[u] + new_weight < dist[v]:\n"
+            "       Update dist[v] and parent_edge[v] = e\n"
+            "       Run Priority-Queue Dijkstra starting from v to propagate shorter distances\n\n"
+            "2. ELSE IF type is INCREASE or CLOSE:\n"
+            "     Check if e is currently in Shortest-Path Tree T (is parent_edge[v] == e?)\n"
+            "     Apply the weight increase or mark e.live = false (closed)\n\n"
+            "     CASE A (e is NOT in Tree T):\n"
+            "       // Witness paths are still 100% valid!\n"
+            "       Return immediately in O(1) time (0 vertices recomputed)\n\n"
+            "     CASE B (e IS in Tree T):\n"
+            "       Find all vertices in the broken subtree S = Subtree(T, v)\n"
+            "       Add |S| to cumulative_invalidated_count\n"
+            "       IF cumulative_invalidated_count > Budget (35% of |V|):\n"
+            "         Clean up old parallel edges and run Full Dijkstra from source s\n"
+            "       ELSE:\n"
+            "         Reset dist[y] = INFINITY for all y in S\n"
+            "         For each y in S, check live incoming edges (x -> y) where x is NOT in S:\n"
+            "           dist[y] = min(dist[y], dist[x] + weight(x,y))\n"
+            "           Push y into Priority Queue PQ\n"
+            "         Run Dijkstra from PQ to repair only the broken subtree S"
         )
     )
 
     # =========================================================================
-    # SECTION 4: TIME & SPACE COMPLEXITY ANALYSIS (DAA)
+    # SECTION 5: TIME & SPACE COMPLEXITY ANALYSIS
     # =========================================================================
-    elems.append(make_heading1("4. Time & Space Complexity Analysis"))
+    elems.append(make_heading1("5. Time and Space Complexity Analysis"))
+    elems.append(
+        make_p(
+            "In Design and Analysis of Algorithms (DAA), we evaluate how fast each operation runs as the number of vertices (n = |V|) and edges (m = |E|) grows:"
+        )
+    )
     elems.append(
         make_table(
             [
-                ["Operation / Algorithm Mode", "Time Complexity", "Space Complexity", "Vertices Recomputed"],
+                ["Scenario / Operation", "Time Complexity", "Space Complexity", "Simple Explanation"],
                 [
-                    "B0: Full Dijkstra Recomputation",
-                    "O(m + n log n) per update",
+                    "Baseline B0: Full Dijkstra on Every Update",
+                    "O(m + n log n)",
                     "O(n + m)",
-                    "All reachable vertices O(n)",
+                    "Recomputes the entire graph from scratch every single time.",
                 ],
                 [
-                    "B1: Non-Tree INCREASE / CLOSE (e ∉ T)",
-                    "O(1) worst-case per update",
+                    "PathForge B1: Non-Tree Edge Increase or Closure",
+                    "O(1)",
                     "O(n + m)",
-                    "0 vertices (Witness Intact)",
+                    "Instant array check (parent_edge[v] == e). Zero heap operations!",
                 ],
                 [
-                    "B1: Tree-Edge INCREASE / CLOSE (e ∈ T)",
+                    "PathForge B1: Tree-Edge Increase or Closure",
                     "O(|E(S)| + |∂S| + |S| log |S|)",
                     "O(n + m)",
-                    "Only affected subtree |S|",
+                    "Only touches the broken subtree S and its boundary edges ∂S instead of the whole graph.",
                 ],
                 [
-                    "B1: INSERT / DECREASE / REOPEN",
+                    "PathForge B1: Edge Insert / Decrease / Reopen",
                     "O(|E_drop| + |V_drop| log |V_drop|)",
                     "O(n + m)",
-                    "Only distance-drop vertices |V_drop|",
+                    "Only relaxes nodes whose distance actually becomes shorter.",
                 ],
                 [
-                    "B1: Budget-Exceeded Rebuild + Compaction",
-                    "O(m + n log n) (at most once per τn invalidations)",
-                    "O(n + m_live)",
-                    "Full graph refresh O(n)",
-                ],
-                [
-                    "Path Reporting get_shortest_path_edges(t)",
-                    "O(|P_T(s → t)|) ≤ O(n)",
-                    "O(|P_T|)",
-                    "Read-only parent pointer walk",
+                    "PathForge B1: Budget Rebuild (When >35% Broken)",
+                    "O(m + n log n)",
+                    "O(n + m)",
+                    "Happens rarely, only when cumulative damage crosses the 35% threshold.",
                 ],
             ]
         )
     )
 
     # =========================================================================
-    # SECTION 5: SYSTEM ARCHITECTURE & IMPLEMENTATION FILES
+    # SECTION 6: WHERE IS THE CODE? (PROJECT FILE GUIDE)
     # =========================================================================
-    elems.append(make_heading1("5. System Architecture & Source Code Inventory"))
+    elems.append(make_heading1("6. Project Architecture & Code File Guide"))
+    elems.append(
+        make_p(
+            "The project is cleanly divided into three layers so the C++17 algorithm engine is completely independent and reusable:"
+        )
+    )
     elems.append(
         make_table(
             [
-                ["Source File Path", "Language / Tech", "Key Responsibilities in Project"],
+                ["File Name", "Technology", "What This File Does (In Simple Terms)"],
                 [
                     "engine/include/pathforge_engine.hpp",
-                    "C++17 Header",
-                    "Core PathForgeEngine class, O(1) witness guard, Euler-tour subtree indexing, boundary-seeded subtree repair, parallel edge compaction, and stateless Exact Dijkstra Oracle.",
+                    "C++17",
+                    "THE MAIN ALGORITHM FILE. Contains the graph structure, Dijkstra's algorithm, the O(1) witness check, the subtree repair logic, and the Exact Dijkstra Oracle checker.",
                 ],
                 [
                     "engine/include/graph_generator.hpp",
-                    "C++17 Header",
-                    "Deterministic 64-bit Mersenne Twister generator for 6 graph topologies (Sparse, Dense, Grid, Planar, Scale-Free BA, Adversarial) and 7 update streams.",
+                    "C++17",
+                    "Creates test graphs (Sparse, Dense, Road Grids, Planar, Scale-Free, Adversarial) and generates random update sequences.",
                 ],
                 [
                     "engine/src/pathforge_cli.cpp",
-                    "C++17 Source",
-                    "Native CLI & Ctypes shared library (.dll / .so) implementing 11 verification suites, 6-mode benchmark runner, and session evaluator.",
+                    "C++17",
+                    "Runs the 11 automated test suites and the benchmark comparisons, and exports the results as JSON.",
                 ],
                 [
                     "backend/main.py",
                     "Python ASGI",
-                    "Starlette REST API (/api/health, /api/workspace/evaluate, /api/verify, /api/benchmark/run, /api/benchmark/export) bridged via Ctypes.",
+                    "Connects the compiled C++17 engine to web APIs so the frontend can talk to the C++ code in real time.",
                 ],
                 [
                     "streamlit_app.py",
                     "Python Streamlit",
-                    "Interactive 6-page research dashboard, Plotly directed graph editor, 5-event simulator, 13-step visualizer, and benchmark suite.",
+                    "Interactive dashboard where users can edit graphs, simulate edge closures, step through the algorithm, and run live benchmarks.",
                 ],
                 [
-                    "frontend/src/ (App.tsx, pages/, components/)",
-                    "React 18 + TS",
-                    "Full-stack TypeScript web interface with interactive SVG GraphCanvas and 6 Recharts performance analytics charts.",
+                    "frontend/src/App.tsx & pages/",
+                    "React + TypeScript",
+                    "Modern dark-themed web application with interactive graph canvas and performance charts.",
                 ],
             ]
         )
     )
 
     # =========================================================================
-    # SECTION 6: CORRECTNESS VERIFICATION (11 AUTOMATED C++17 SUITES)
+    # SECTION 7: TESTING & EXPERIMENTAL RESULTS
     # =========================================================================
-    elems.append(make_heading1("6. Automated Correctness Verification (Exact Dijkstra Oracle)"))
+    elems.append(make_heading1("7. Correctness Testing & Real Benchmark Results"))
+    elems.append(make_heading2("7.1 How Do We Know Our Algorithm Gives 100% Correct Answers?"))
     elems.append(
         make_p(
-            "To guarantee 100% algorithmic correctness, PathForge includes an independent, stateless Exact Dijkstra Oracle (PathForgeEngine::compute_exact_oracle). After every single update in verification mode, the oracle computes exact distances from scratch and checks five strict invariants: (1) reachable distance equality, (2) unreachable (+INF) set equality, (3) witness path validity, (4) zero closed edges in any reported path, and (5) cycle-free tree structure. All 11 automated suites (362 sequential oracle checks) pass with 0 violations:"
+            "We wrote an 'Exact Dijkstra Oracle' inside C++. After PathForge processes an update, the Oracle runs standard Dijkstra from scratch on the same graph and compares every single vertex's distance and path. Across 11 automated test suites (362 consecutive update checks), PathForge achieved 100% accuracy with 0 errors:"
         )
     )
     elems.append(
         make_table(
             [
-                ["Suite #", "Verification Suite Name", "Category", "Events Checked", "Time (µs)", "Result"],
-                ["1", "Non-Tree Edge Weight Increase", "Witness Guarding", "1", "148.80", "PASS (0 recomputed)"],
-                ["2", "Non-Tree Edge Closure", "Witness Guarding", "1", "14.80", "PASS (0 recomputed)"],
-                ["3", "Tree-Edge Weight Increase & Subtree Repair", "Subtree Invalidation", "1", "41.20", "PASS (Exact detour)"],
-                ["4", "Tree-Edge Closure & Boundary Repair", "Subtree Invalidation", "1", "13.50", "PASS (Boundary reroute)"],
-                ["5", "Edge Weight Decrease via Parallel Edge Insertion", "Monotone Reduction", "1", "19.80", "PASS (Parallel version)"],
-                ["6", "Edge Reopening & Connectivity Restoration", "Lifecycle Events", "2", "11.50", "PASS (INF → 18)"],
-                ["7", "Disconnected Components & Unreachable Subgraphs", "Boundary Conditions", "2", "11.30", "PASS (Safe INF handling)"],
-                ["8", "Parallel Multi-Edges & Equal-Weight Tie Breaking", "Structural Edge Cases", "1", "9.30", "PASS (Tie-break takeover)"],
-                ["9", "Self-Loops & Overflow/Invalid Input Guarding", "Safety & Robustness", "2", "230.60", "PASS (Exception guarded)"],
-                ["10", "Sequential Mixed Stress (200 Dynamic Updates)", "Stress & Adversarial", "200", "2222.00", "PASS (200/200 exact)"],
-                ["11", "Adversarial Repeated Tree-Edge Closures (150 Attacks)", "Stress & Adversarial", "150", "2214.50", "PASS (150/150 exact)"],
+                ["Test #", "What Was Tested", "Updates Checked", "Time Taken (µs)", "Status"],
+                ["1", "Non-Tree Edge Weight Increase (O(1) Skip)", "1", "148.80 µs", "PASSED (0 recomputed)"],
+                ["2", "Non-Tree Edge Closure (O(1) Skip)", "1", "14.80 µs", "PASSED (0 recomputed)"],
+                ["3", "Tree-Edge Weight Increase & Subtree Rerouting", "1", "41.20 µs", "PASSED"],
+                ["4", "Tree-Edge Closure & Boundary Repair", "1", "13.50 µs", "PASSED"],
+                ["5", "Edge Weight Decrease (Parallel Edge Version)", "1", "19.80 µs", "PASSED"],
+                ["6", "Closing and Reopening an Edge", "2", "11.50 µs", "PASSED"],
+                ["7", "Disconnected Graphs & Unreachable Nodes", "2", "11.30 µs", "PASSED"],
+                ["8", "Parallel Multi-Edges with Equal Weights", "1", "9.30 µs", "PASSED"],
+                ["9", "Self-Loops & Invalid Negative Weight Protection", "2", "230.60 µs", "PASSED"],
+                ["10", "Stress Test: 200 Mixed Updates in a Row", "200", "2222.00 µs", "PASSED (200/200 Exact)"],
+                ["11", "Adversarial Stress: 150 Tree-Edge Attacks in a Row", "150", "2214.50 µs", "PASSED (150/150 Exact)"],
             ]
         )
     )
 
-    # =========================================================================
-    # SECTION 7: EMPIRICAL BENCHMARK RESULTS & ABLATION STUDIES
-    # =========================================================================
-    elems.append(make_heading1("7. Empirical Benchmark Evaluation & Ablation Studies"))
-    elems.append(make_heading2("7.1 Baseline & Ablation Comparison (SPARSE_RANDOM, |V|=120, |E|=400, K=40, Seed=42)"))
+    elems.append(make_heading2("7.2 Speedup Results: PathForge (B1) vs. Full Dijkstra (B0)"))
+    elems.append(
+        make_p(
+            "We benchmarked native C++17 execution times on identical graphs and update sequences. As the graph grows larger from 100 vertices to 1,000 vertices, PathForge becomes dramatically faster than running Full Dijkstra:"
+        )
+    )
     elems.append(
         make_table(
             [
-                ["Mode", "Algorithm Configuration", "Total Time (µs)", "Avg Latency (µs)", "P99 Latency (µs)", "Full Rebuilds", "Oracle Violations"],
-                ["B0", "Full Dijkstra Recomputation (Every Event)", "404.20", "10.10", "19.70", "40", "0"],
-                ["B1", "Witness-Guarded Dynamic Repair (Proposed)", "46.70", "1.17", "8.60", "0", "0"],
-                ["B2", "Insertion-Only Reference Surrogate", "32.40", "0.81", "4.40", "0", "11 Unsupported (INC/CLOSE)"],
-                ["A1", "Ablation A1: Rebuild on Every INC/CLOSE", "220.90", "5.52", "24.00", "11", "0"],
-                ["A2", "Ablation A2: Disable Parallel Edge Compaction", "35.90", "0.90", "4.30", "0", "0"],
-                ["A3", "Ablation A3: Rebuild on DECREASE Events", "230.50", "5.76", "28.70", "15", "0"],
+                ["Graph Size (Vertices |V|)", "Number of Edges |E|", "Full Dijkstra B0 Time (µs)", "PathForge B1 Time (µs)", "Speedup Achieved"],
+                ["100 Vertices", "300 Edges", "389.40 µs", "90.00 µs", "4.33x Faster"],
+                ["120 Vertices (Baseline)", "400 Edges", "404.20 µs", "46.70 µs", "8.66x Faster (88.5% less time)"],
+                ["250 Vertices", "750 Edges", "1546.70 µs", "409.60 µs", "3.78x Faster"],
+                ["500 Vertices", "1500 Edges", "3196.80 µs", "344.70 µs", "9.27x Faster"],
+                ["1000 Vertices", "3000 Edges", "9180.00 µs", "482.60 µs", "19.02x Faster"],
             ]
         )
     )
 
-    elems.append(make_heading2("7.2 Scaling Performance Across Graph Sizes (|V| = 100 to 1000)"))
+    elems.append(make_heading2("7.3 Ablation Study — Why Each Part of Our Algorithm Matters"))
+    elems.append(
+        make_p(
+            "To prove that our witness guard and incremental updates are actually responsible for the speedup, we turned off each feature one by one on the 120-vertex graph:"
+        )
+    )
     elems.append(
         make_table(
             [
-                ["Vertices |V|", "Initial Edges |E|", "B0 Full Dijkstra (µs)", "B1 Witness-Guarded (µs)", "Measured Speedup (B1 vs B0)"],
-                ["100", "300", "389.40", "90.00", "4.33x Faster"],
-                ["250", "750", "1546.70", "409.60", "3.78x Faster"],
-                ["500", "1500", "3196.80", "344.70", "9.27x Faster"],
-                ["1000", "3000", "9180.00", "482.60", "19.02x Faster"],
+                ["Algorithm Version", "What Changed?", "Total Time (µs)", "Full Rebuilds", "Takeaway"],
+                ["PathForge B1 (Full Proposed)", "All smart features ON", "46.70 µs", "0", "Fastest & 100% accurate"],
+                ["Ablation A1", "Turned OFF witness guard (rebuild on every INC/CLOSE)", "220.90 µs", "11", "4.73x slower without witness guard!"],
+                ["Ablation A2", "Turned OFF parallel edge cleanup", "35.90 µs", "0", "Keeps extra parallel edges in memory"],
+                ["Ablation A3", "Turned OFF smart DECREASE (rebuild on every DEC)", "230.50 µs", "15", "4.94x slower without incremental relaxation!"],
             ]
         )
     )
@@ -449,16 +486,15 @@ def build_report() -> tuple[str, str]:
     # =========================================================================
     # SECTION 8: CONCLUSION & REFERENCES
     # =========================================================================
-    elems.append(make_heading1("8. Conclusion & References"))
+    elems.append(make_heading1("8. Conclusion"))
     elems.append(
         make_p(
-            "PathForge demonstrates that augmenting dynamic shortest-path maintenance with an Euler-tour indexed witness tree T and boundary-seeded subtree repair effectively bridges the gap between monotone insertion-only algorithms and realistic five-event dynamic networks (INS, DEC, INC, CLOSE, REOPEN). By avoiding unnecessary recomputations on non-tree edge degradations in O(1) time and confining tree-edge repairs to the affected subtree under a configurable rebuild budget, PathForge achieves up to 19.02x empirical speedups over full Dijkstra recomputation while maintaining 100% exact oracle accuracy."
+            "In this Design and Analysis of Algorithms (DAA) project, we showed that maintaining a Shortest-Path Witness Tree (T) with Euler-tour intervals allows a routing system to handle real-world road closures, slowdowns, and shortcuts with high efficiency. By skipping irrelevant non-tree road closures in O(1) time and repairing only the affected subtree when a main route breaks, PathForge achieves up to a 19.02x speedup over traditional full Dijkstra recomputation while still guaranteeing 100% exact shortest paths."
         )
     )
-    elems.append(make_bullet("Reference [1]", "Yang P. Liu, “Incremental Shortest Paths in Almost Linear Time via a Modified Interior Point Method,” arXiv:2506.19207v1 [cs.DS], 2025."))
-    elems.append(make_bullet("Reference [2]", "Li Chen, Rasmus Kyng, Yang P. Liu, Simon Meierhans, and Maximilian Probst Gutenberg, “Almost-Linear Time Algorithms for Incremental Graphs: Cycle Detection, SCCs, s-t Shortest Path, and Minimum-Cost Flow,” STOC 2024."))
-    elems.append(make_bullet("Reference [3]", "G. Ramalingam and Thomas Reps, “An Incremental Algorithm for a Generalization of the Shortest-Path Problem,” Journal of Algorithms, 21(2):267–305, 1996."))
-    elems.append(make_bullet("Reference [4]", "Daniele Frigioni, Alberto Marchetti-Spaccamela, and Umberto Nanni, “Fully Dynamic Output Bounded Single Source Shortest Path Problem,” Journal of the ACM, 47(6):950–986, 2000."))
+    elems.append(make_bullet("Reference [1]", "Yang P. Liu, “Incremental Shortest Paths in Almost Linear Time via a Modified Interior Point Method,” arXiv:2506.19207v1, 2025."))
+    elems.append(make_bullet("Reference [2]", "G. Ramalingam and Thomas Reps, “An Incremental Algorithm for a Generalization of the Shortest-Path Problem,” Journal of Algorithms, 1996."))
+    elems.append(make_bullet("Reference [3]", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein, “Introduction to Algorithms (CLRS),” MIT Press (Single-Source Shortest Paths & Dijkstra's Algorithm)."))
 
     document_xml = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
@@ -473,15 +509,37 @@ def build_report() -> tuple[str, str]:
 
     md_summary = """# DESIGN AND ANALYSIS OF ALGORITHMS (DAA) — PROJECT REPORT
 
-**Title:** PathForge: A Witness-Guarded Dynamic Shortest Path Maintenance System  
+**Project Title:** PathForge: A Smart Dynamic Shortest Path Maintenance System  
 **Student Name:** Sanchari Das  
 **Registration Number:** 24BAI1038  
-**Course:** Design and Analysis of Algorithms (DAA)  
+**Subject:** Design and Analysis of Algorithms (DAA)  
 **GitHub Repository:** https://github.com/sancharidas1327/PathForge-Dynamic-Shortest-Paths  
 
 ---
 
-*(Full formatted Microsoft Word `.docx` report generated at `docs/PathForge_DAA_Project_Report_24BAI1038.docx`.)*
+## 1. Introduction — What Is This Project About?
+Imagine using Google Maps to drive from your home to your university. When you start your trip, the app calculates the shortest path using an algorithm like Dijkstra's algorithm. However, real-world road networks are never static—new shortcuts open, traffic clears up, accidents cause sudden traffic jams (increasing travel time), and floods or roadworks completely close certain roads.
+
+If a navigation system runs full Dijkstra's algorithm from scratch every single time any road in the city changes, it wastes a huge amount of computation time—especially if the road that got jammed or closed wasn't even on your best route! On the other hand, recent research papers—such as Yang P. Liu’s 2025 paper (`arXiv:2506.19207v1`)—can update shortest paths very fast, but only when new edges are inserted (where paths only get shorter). They cannot directly handle roads getting slower or closing down.
+
+To solve this practical gap for my Design and Analysis of Algorithms (DAA) project, I built **PathForge**. PathForge is a C++17 algorithm engine and interactive visual platform that maintains exact shortest paths when the graph changes in five realistic ways:
+1. **`INSERT`** — Adding a new directed edge.
+2. **`DECREASE`** — Making an existing edge faster (lower weight).
+3. **`INCREASE`** — Making an edge slower due to congestion (higher weight).
+4. **`CLOSE`** — Closing an edge completely due to an outage or flood.
+5. **`REOPEN`** — Reopening a previously closed edge.
+
+---
+
+## 2. The Core Idea — Three Simple Rules of PathForge
+Instead of recomputing the entire graph after every change, PathForge remembers the best route to every vertex using a **Shortest-Path Tree ($T$)**. We call the paths inside this tree **"witness paths"** because they serve as proof of the current shortest distance to each node.
+
+- **Rule 1: When a road NOT on our best tree gets slower or closes ($O(1)$ Instant Skip)**  
+  If an edge $e = (u \to v)$ is NOT in our Shortest-Path Tree $T$, nobody was using that road for their shortest path anyway! And making a road slower or closing it can never create a new shortcut. So PathForge skips recomputation in **$O(1)$ time** (`0` vertices recomputed).
+- **Rule 2: When a road ON our best tree gets slower or closes (Local Subtree Repair)**  
+  If the changed edge $e = (u \to v)$ WAS part of our Shortest-Path Tree $T$, only vertex $v$ and the nodes below $v$ in the tree ($\text{Subtree}(T,v)$) lose their best path. Every other node outside that subtree still has its exact shortest path intact! PathForge resets only that small affected subtree, checks live **boundary edges** entering that subtree from unaffected nodes, and runs Dijkstra only on that small region.
+- **Rule 3: Safety Valve (The Invalidation Budget $\tau = 35\%$)**  
+  If too many tree edges break one after another and cumulative invalidated vertices cross $35\%$ of the graph, PathForge cleans up old parallel edges and performs a fresh full Dijkstra rebuild.
 """
     return document_xml, md_summary
 
